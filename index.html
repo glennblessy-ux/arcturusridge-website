@@ -6,11 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ArcturusRidge — Your Dedicated Accounts Payable Team</title>
 <meta name="description" content="ArcturusRidge manages your end-to-end accounts payable inside your existing ERP — invoice capture, 3-way matching, vendor reconciliations and tax compliance.">
+<link rel="canonical" href="https://arcturusridge.com/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<link rel="preload" href="assets/fonts/montserrat-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/montserrat-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/montserrat-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/montserrat-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/montserrat-latin-700-normal.woff2) format('woff2')}
+
 :root{
   --g:clamp(18px,3vw,48px); --max:1240px; --ease:cubic-bezier(.2,.7,.1,1);
 }
@@ -312,6 +316,35 @@ textarea.f{min-height:110px;line-height:1.5}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.hero .in{opacity:1;transform:none}}
 
+
+/* legal pages */
+.legal{max-width:820px}
+.legal .upd{font-size:13.5px;color:var(--mute);margin:6px 0 28px}
+.legal h2{font-size:21px;font-weight:600;color:var(--navy);margin:38px 0 10px;letter-spacing:-.01em}
+.legal h3{font-size:16px;font-weight:600;color:var(--navy);margin:22px 0 6px}
+.legal p,.legal li{font-size:15.5px;line-height:1.75;color:var(--body)}
+.legal ul{padding-left:20px;margin:8px 0 14px}.legal li{margin:4px 0}
+.legal table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:14.5px}
+.legal th,.legal td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--body)}
+.legal th{color:var(--navy);font-weight:600;background:var(--stone)}
+.legal .toc{background:var(--stone);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:10px}
+.legal .toc a{display:inline-block;margin:3px 14px 3px 0;font-size:14px;color:var(--gold-ink);text-decoration:none;font-weight:600}
+.legal .toc a:hover{text-decoration:underline}
+.linklike{background:none;border:0;padding:0;font:inherit;color:var(--gold-ink);font-weight:600;cursor:pointer;text-decoration:underline}
+.formnote{font-size:12.5px;color:var(--mute);margin-top:10px;text-align:center}.formnote a{color:var(--gold-ink)}
+.ft-legal{display:flex;flex-wrap:wrap;gap:6px 18px}.ft-legal a,.ft-legal button{font-size:12.5px;color:var(--od2);background:none;border:0;padding:0;cursor:pointer;font-family:inherit;min-height:0;text-decoration:none}
+.ft-legal a:hover,.ft-legal button:hover{color:var(--gold)}
+/* cookie banner */
+.cookie{position:fixed;left:18px;bottom:76px;z-index:70;width:min(400px,calc(100vw - 36px));background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 50px -20px rgba(0,0,0,.35);padding:20px 20px 18px;font-size:14px;color:var(--body);line-height:1.6}
+.cookie[hidden]{display:none}
+.cookie h2{font-size:16px;font-weight:600;color:var(--navy);margin:0 0 6px}
+.cookie p{margin:0 0 14px}.cookie a{color:var(--gold-ink);font-weight:600}
+.cookie .row{display:flex;gap:8px;flex-wrap:wrap}
+.cookie .row button{flex:1;min-width:120px;height:42px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.cookie .acc{background:var(--navy);color:#fff;border:1px solid var(--navy)}
+.cookie .rej{background:#fff;color:var(--navy);border:1px solid var(--b1)}
+.cookie .row button:hover{filter:brightness(1.08)}
+@media (max-width:720px){.cookie{left:12px;right:12px;width:auto;bottom:70px}}
 /* theme switcher */
 .themer{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px 6px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,.08);border-radius:999px;box-shadow:0 14px 34px -14px rgba(0,0,0,.35);font-size:12px;font-weight:600;color:#333}
 .themer .tl{letter-spacing:.12em;text-transform:uppercase;font-size:10.5px;color:#666;margin-right:4px}
@@ -335,6 +368,7 @@ body{padding-bottom:70px}
 <a href="#home" data-nav="home">Home</a>
 <a href="#how-it-works" data-nav="how-it-works">How it works</a>
 <a href="#pricing" data-nav="pricing">Pricing</a>
+<a href="/insights/">Insights</a>
 <a href="#contact" data-nav="contact">Contact &amp; FAQ</a>
 <a href="#contact" class="btn btn-n">Free AP audit</a>
 </nav>
@@ -345,6 +379,7 @@ body{padding-bottom:70px}
 <a href="#home">Home</a>
 <a href="#how-it-works">How it works</a>
 <a href="#pricing">Pricing</a>
+<a href="/insights/">Insights</a>
 <a href="#contact">Contact &amp; FAQ</a>
 <a href="#contact" class="btn btn-g">Request a free AP audit</a>
 </nav>
@@ -650,7 +685,7 @@ body{padding-bottom:70px}
 <label class="fl full">Anything else we should know?<textarea class="f" name="message" rows="4" style="resize:vertical" placeholder="Current challenges, timelines, number of entities…"></textarea></label>
 <label class="hp" aria-hidden="true">Leave blank<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
 <p class="err full" id="formErr" role="alert"></p>
-<div class="full"><button type="submit" class="btn btn-n" style="width:100%">Get your custom FTE quote</button></div>
+<div class="full"><button type="submit" class="btn btn-n" style="width:100%">Get your custom FTE quote</button><p class="formnote">By submitting, you agree to our <a href="#privacy">Privacy Policy</a>.</p></div>
 </form>
 <div class="thanks" role="status">
 <span class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>
@@ -678,17 +713,124 @@ body{padding-bottom:70px}
 </div>
 </section>
 </div>
+<div class="page" data-page="privacy">
+<section class="sec"><div class="wrap"><article class="legal">
+<span class="eyebrow">Legal</span>
+<h1 class="h2" style="font-size:clamp(32px,4vw,48px);margin-top:10px">Privacy Policy</h1>
+<p class="upd">Last updated: 23 November 2026</p>
+<div class="toc"><a href="#privacy" data-jump="pp-who">Who we are</a><a href="#privacy" data-jump="pp-collect">What we collect</a><a href="#privacy" data-jump="pp-use">How we use it</a><a href="#privacy" data-jump="pp-share">Who we share it with</a><a href="#privacy" data-jump="pp-cookies">Cookies</a><a href="#privacy" data-jump="pp-keep">How long we keep it</a><a href="#privacy" data-jump="pp-rights">Your rights</a><a href="#privacy" data-jump="pp-contact">Contact</a></div>
+<p>This policy explains how ArcturusRidge Corporate Services Private Limited (“ArcturusRidge”, “we”, “us”) handles personal information collected through arcturusridge.com. It applies to visitors to this website and to people who contact us about our services. It does not cover client data we process while delivering accounts payable services — that is governed by the service agreement and data processing terms we sign with each client.</p>
+
+<h2 id="pp-who">1. Who we are</h2>
+<p>ArcturusRidge Corporate Services Private Limited is a company incorporated in India. We are the data fiduciary (under India’s Digital Personal Data Protection Act, 2023) and the data controller (under the UK and EU GDPR, where they apply) for the personal information described in this policy.</p>
+
+<h2 id="pp-collect">2. What we collect</h2>
+<h3>Information you give us</h3>
+<p>When you submit the enquiry form, email or call us, we collect what you choose to share, which may include:</p>
+<ul><li>your name, work email address, company name and phone number (with country code);</li><li>your monthly invoice volume and the ERP or accounting system you use;</li><li>anything you write in your message.</li></ul>
+<p>Please don’t send us invoices, bank details or other sensitive financial records through the website form.</p>
+<h3>Information collected automatically</h3>
+<ul><li><strong>Server logs.</strong> Our hosting provider records technical data such as your IP address, browser type and the pages requested, for security and to keep the site running.</li><li><strong>Preferences stored on your device.</strong> We store your colour-theme and cookie choices in your browser’s local storage. These never leave your device.</li></ul>
+<p>We do not currently use advertising cookies or tracking pixels. We would only add analytics with your consent (see section 5).</p>
+
+<h2 id="pp-use">3. How we use your information</h2>
+<table><thead><tr><th>Purpose</th><th>Legal basis</th></tr></thead><tbody>
+<tr><td>Replying to your enquiry, preparing a quote or AP audit, and arranging a consultation</td><td>Your consent and our legitimate interest in responding to business enquiries; steps at your request before entering a contract</td></tr>
+<tr><td>Keeping the website secure and working properly</td><td>Legitimate interests</td></tr>
+<tr><td>Following up about our services, where you have shown interest</td><td>Legitimate interests (business contacts). You can opt out at any time.</td></tr>
+<tr><td>Meeting legal, tax and regulatory obligations</td><td>Legal obligation</td></tr>
+</tbody></table>
+<p>We do not sell your personal information, and we do not use it for automated decisions that have legal or similarly significant effects on you.</p>
+
+<h2 id="pp-share">4. Who we share it with</h2>
+<p>We share information only with service providers who help us run this website and our communications, under contracts that require them to protect it:</p>
+<ul><li><strong>GitHub, Inc.</strong> (website hosting) — server logs;</li><li><strong>FormSubmit</strong> (form delivery) — the details you enter in the enquiry form, which it forwards to our mailbox;</li><li><strong>Microsoft Corporation</strong> (Microsoft 365 email) — enquiries and correspondence;</li><li><strong>Flagpedia / flagcdn.com</strong> — loads the country flag images in the phone field, which means your browser sends it your IP address.</li></ul>
+<p>We may also disclose information if required by law, or to protect our rights, our clients or the public.</p>
+<p><strong>International transfers.</strong> Some of these providers store data outside India, including in the United States. Where UK or EU law applies, we rely on appropriate safeguards such as standard contractual clauses.</p>
+
+<h2 id="pp-cookies">5. Cookies and similar technologies</h2>
+<p>The site uses only storage that is strictly necessary or that remembers choices you make:</p>
+<table><thead><tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr></thead><tbody>
+<tr><td>ar-theme</td><td>Local storage</td><td>Remembers the colour theme you picked</td><td>Until you clear it</td></tr>
+<tr><td>ar-consent</td><td>Local storage</td><td>Remembers your cookie choice</td><td>12 months</td></tr>
+</tbody></table>
+<p>If we add analytics in the future, it will only run if you click “Accept all” in the cookie banner. You can change your choice at any time using <button type="button" class="linklike" data-cookie-settings>Cookie settings</button> at the bottom of every page.</p>
+
+<h2 id="pp-keep">6. How long we keep it</h2>
+<ul><li>Enquiries that don’t lead to a contract: up to 24 months after our last contact, then deleted.</li><li>Information about clients: for the length of the relationship and afterwards as required for legal, tax and accounting purposes.</li><li>Server logs: kept by our hosting provider in line with its own retention policy.</li></ul>
+
+<h2 id="pp-security">7. Security</h2>
+<p>We use reasonable technical and organisational measures to protect personal information, including encrypted (HTTPS) connections, access controls and multi-factor authentication on our business accounts. No method of transmission over the internet is completely secure, but we work to protect your information and will notify you and the relevant authorities of a breach where the law requires it.</p>
+
+<h2 id="pp-rights">8. Your rights</h2>
+<p>Depending on where you live, you may have the right to:</p>
+<ul><li>access the personal information we hold about you and get a copy;</li><li>correct or update inaccurate information;</li><li>ask us to delete your information;</li><li>withdraw consent at any time (this doesn’t affect anything we did before you withdrew it);</li><li>object to, or ask us to restrict, certain processing — including follow-up about our services;</li><li>nominate another person to exercise your rights if you die or become unable to (India);</li><li>complain to a regulator — the Data Protection Board of India, the UK Information Commissioner’s Office, or your local EU data protection authority.</li></ul>
+<p>To exercise any of these rights, email us at the address below. We will reply within 30 days and may need to confirm your identity first.</p>
+
+<h2 id="pp-children">9. Children</h2>
+<p>Our services are for businesses. This website is not intended for anyone under 18, and we do not knowingly collect their personal information.</p>
+
+<h2 id="pp-changes">10. Changes to this policy</h2>
+<p>We may update this policy from time to time. The “last updated” date at the top shows when it last changed. Significant changes will be highlighted on this page.</p>
+
+<h2 id="pp-contact">11. Contact and grievance officer</h2>
+<p>For privacy questions, requests or complaints, contact our Grievance Officer:</p>
+<p><strong>ArcturusRidge Corporate Services Private Limited</strong><br>Email: <a href="mailto:support@arcturusridge.com?subject=Privacy%20request">support@arcturusridge.com</a> (subject: “Privacy request”)<br>Phone: <a href="tel:+917806894099">+91 78068 94099</a></p>
+</article></div></section>
+</div>
+<div class="page" data-page="terms">
+<section class="sec"><div class="wrap"><article class="legal">
+<span class="eyebrow">Legal</span>
+<h1 class="h2" style="font-size:clamp(32px,4vw,48px);margin-top:10px">Terms of Use</h1>
+<p class="upd">Last updated: 23 November 2026</p>
+<p>These terms govern your use of arcturusridge.com (the “website”), operated by ArcturusRidge Corporate Services Private Limited (“ArcturusRidge”, “we”, “us”). By using the website you agree to them. If you don’t agree, please don’t use the website.</p>
+
+<h2>1. About the website</h2>
+<p>The website gives general information about our managed accounts payable services and lets you contact us. It does not by itself create a contract for services. Any engagement is governed by a separate written agreement signed by both parties, which takes priority over anything on this website.</p>
+
+<h2>2. Information, estimates and pricing</h2>
+<ul><li>Content is provided for general information only and is not accounting, tax, legal or financial advice. You should take professional advice for your specific situation.</li><li>Results from the savings calculator, and figures such as cost reductions or turnaround times, are indicative estimates. They are not a quote, guarantee or offer.</li><li>Prices, service scope and SLAs are confirmed only in a written proposal or agreement.</li></ul>
+
+<h2>3. Acceptable use</h2>
+<p>You agree not to:</p>
+<ul><li>use the website for anything unlawful, fraudulent or harmful;</li><li>try to gain unauthorised access to the website, its servers or any connected systems, or interfere with how it works;</li><li>send spam, malware or false information through the enquiry form;</li><li>copy, scrape or reuse the website’s content for commercial purposes without our written permission.</li></ul>
+
+<h2>4. Intellectual property</h2>
+<p>The website and its content — including text, design, graphics, images, video and the ArcturusRidge name and logo — belong to ArcturusRidge or its licensors and are protected by intellectual property laws. You may view and print pages for your own business use in considering our services. Any other use needs our prior written consent.</p>
+
+<h2>5. Third-party links and services</h2>
+<p>The website may link to, or rely on, third-party websites and services. We are not responsible for their content, availability or privacy practices.</p>
+
+<h2>6. Availability</h2>
+<p>We aim to keep the website available and accurate, but we don’t guarantee that it will be uninterrupted, error-free or free of harmful components. We may change, suspend or withdraw any part of it without notice.</p>
+
+<h2>7. Limitation of liability</h2>
+<p>To the fullest extent permitted by law, the website is provided “as is”, and ArcturusRidge is not liable for any indirect, incidental or consequential loss, or for any loss of profit, revenue, data or business opportunity, arising from your use of, or reliance on, the website. Nothing in these terms limits liability that cannot be limited by law.</p>
+
+<h2>8. Privacy</h2>
+<p>Our <a href="#privacy">Privacy Policy</a> explains how we handle personal information collected through the website.</p>
+
+<h2>9. Changes</h2>
+<p>We may update these terms from time to time. The version on this page at the time you use the website applies.</p>
+
+<h2>10. Governing law</h2>
+<p>These terms are governed by the laws of India. The courts of India have exclusive jurisdiction over any dispute arising from them or from your use of the website.</p>
+
+<h2>11. Contact</h2>
+<p>Questions about these terms: <a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a> · <a href="tel:+917806894099">+91 78068 94099</a></p>
+</article></div></section>
+</div>
 </main>
 
 <footer class="ft">
 <div class="wrap">
 <div class="ft-grid">
 <div style="display:flex;flex-direction:column;gap:20px"><img class="ft-logo" src="assets/logo-full-white.svg" alt="ArcturusRidge Corporate Services"><p style="max-width:320px;font-size:14px">Your dedicated accounts payable team — working inside your ERP from Day 1.</p></div>
-<div><h4>Explore</h4><div style="display:flex;flex-direction:column"><a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div></div>
+<div><h4>Explore</h4><div style="display:flex;flex-direction:column"><a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a><a href="/insights/">Insights</a><a href="#faq">FAQ</a></div></div>
 <div><h4>Get started</h4><div style="display:flex;flex-direction:column"><a href="#contact">Free AP audit</a><a href="#savings">Savings calculator</a><a href="#contact">Custom FTE quote</a></div></div>
 <div><h4>Contact</h4><p style="font-size:14px;line-height:1.9"><a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a><br><a href="tel:+917806894099">+91 78068 94099</a></p></div>
 </div>
-<div class="ft-bot"><span>© 2026 ArcturusRidge Corporate Services Private Limited</span><span>Managed Accounts Payable</span></div>
+<div class="ft-bot"><span>© 2026 ArcturusRidge Corporate Services Private Limited</span><nav class="ft-legal" aria-label="Legal"><a href="#privacy">Privacy Policy</a><a href="#terms">Terms of Use</a><button type="button" data-cookie-settings>Cookie settings</button></nav></div>
 </div>
 </footer>
 <button class="totop" id="totop" type="button" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
@@ -701,7 +843,7 @@ body{padding-bottom:70px}
   var pages = {}; $$('.page').forEach(function (p) { pages[p.dataset.page] = p; });
   // section anchors that live inside a page
   var SECTIONS = { savings: 'home', faq: 'contact' };
-  var TITLES = { home: 'ArcturusRidge — Your Dedicated Accounts Payable Team', 'how-it-works': 'How it works — ArcturusRidge', pricing: 'Pricing — ArcturusRidge', contact: 'Contact & FAQ — ArcturusRidge' };
+  var TITLES = { home: 'ArcturusRidge — Your Dedicated Accounts Payable Team', 'how-it-works': 'How it works — ArcturusRidge', pricing: 'Pricing — ArcturusRidge', contact: 'Contact & FAQ — ArcturusRidge', privacy: 'Privacy Policy — ArcturusRidge', terms: 'Terms of Use — ArcturusRidge' };
   var current = null;
 
   /* reveal on scroll */
@@ -753,6 +895,12 @@ body{padding-bottom:70px}
     else if (page === current && !pages[h] && !h) window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-jump]'); if (!a) return;
+    e.preventDefault(); var id = a.dataset.jump, pg = a.getAttribute('href') || '#privacy';
+    if (location.hash !== pg) { location.hash = pg; }
+    setTimeout(function () { var t = document.getElementById(id); if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: reduce ? 'auto' : 'smooth' }); }, 120);
+  });
   // clicking a link to the page you're already on scrolls to the top
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
@@ -860,6 +1008,20 @@ body{padding-bottom:70px}
 
   route();
 })();
+</script>
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="ckT" aria-describedby="ckD" hidden>
+<h2 id="ckT">Your privacy</h2>
+<p id="ckD">We use only essential storage to make this site work and remember your choices. With your OK we may also use analytics cookies to understand how the site is used. <a href="#privacy" data-jump="pp-cookies">Learn more</a></p>
+<div class="row"><button type="button" class="rej" id="ckRej">Essential only</button><button type="button" class="acc" id="ckAcc">Accept all</button></div>
+</div>
+<script>
+(function(){var box=document.getElementById('cookie'),K='ar-consent',YEAR=365*864e5;
+function get(){try{var v=JSON.parse(localStorage.getItem(K)||'null');if(v&&Date.now()-v.t<YEAR)return v.c}catch(e){}return null}
+function save(c){try{localStorage.setItem(K,JSON.stringify({c:c,t:Date.now()}))}catch(e){}window.arConsent=c;box.hidden=true;document.dispatchEvent(new CustomEvent('ar:consent',{detail:c}))}
+window.arConsent=get();if(!window.arConsent)box.hidden=false;
+document.getElementById('ckAcc').addEventListener('click',function(){save('all')});
+document.getElementById('ckRej').addEventListener('click',function(){save('essential')});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cookie-settings]');if(b){box.hidden=false;document.getElementById('ckRej').focus()}});})();
 </script>
 <div class="themer" role="group" aria-label="Colour theme"><span class="tl">Theme</span><button type="button" data-t="original" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#0B1F3A 50%,#C9A24A 50%)"></span><span class="nm">Original</span></button><button type="button" data-t="purple" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#352B48 50%,#CFB4F7 50%)"></span><span class="nm">Purple</span></button><button type="button" data-t="green" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#111827 50%,#22C55E 50%)"></span><span class="nm">Green</span></button><button type="button" data-t="blue" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#181B3C 50%,#E0DCE8 50%)"></span><span class="nm">Blue</span></button><button type="button" data-t="red" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#990000 50%,#FF9999 50%)"></span><span class="nm">Red</span></button></div>
 <script>
