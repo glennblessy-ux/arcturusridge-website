@@ -253,6 +253,11 @@ form .full{grid-column:1/-1}
 .fl{display:flex;flex-direction:column;gap:6px;font-size:13.5px;font-weight:600;color:var(--navy)}
 .f{width:100%;min-height:50px;padding:12px 14px;border:1px solid #CDD1D6;border-radius:8px;background:#fff;color:var(--ink);font-size:15.5px;font-weight:500;transition:border-color .2s,box-shadow .2s}
 .f:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.2)}
+.f::placeholder{color:#9AA3AE;font-weight:400}
+select.f{-webkit-appearance:none;appearance:none;height:50px;line-height:24px;padding-right:42px;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230B1F3A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center}
+textarea.f{min-height:110px;line-height:1.5}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+#form button[disabled]{opacity:.7;cursor:wait}
 .f.bad{border-color:#B3261E}
 .err{font-size:13.5px;color:#B3261E;min-height:20px}
 .thanks{display:none;flex-direction:column;gap:16px;align-items:flex-start}
@@ -595,13 +600,14 @@ form .full{grid-column:1/-1}
 <div class="formcard" id="formWrap">
 <form id="form" novalidate>
 <div class="full"><h2 class="h3" style="font-size:22px">Request a free AP process audit</h2><p class="small" style="margin-top:4px">Takes under a minute. Fields marked * are required.</p></div>
-<label class="fl">Full name *<input class="f" type="text" name="fullname" autocomplete="name" required></label>
-<label class="fl">Work email *<input class="f" type="email" name="email" autocomplete="email" required></label>
-<label class="fl">Company<input class="f" type="text" name="company" autocomplete="organization"></label>
-<label class="fl">Phone<input class="f" type="tel" name="phone" autocomplete="tel"></label>
+<label class="fl">Full name *<input class="f" type="text" name="fullname" autocomplete="name" placeholder="Jane Smith" required></label>
+<label class="fl">Work email *<input class="f" type="email" name="email" autocomplete="email" placeholder="jane@company.com" required></label>
+<label class="fl">Company<input class="f" type="text" name="company" autocomplete="organization" placeholder="Company name"></label>
+<label class="fl">Phone<input class="f" type="tel" name="phone" autocomplete="tel" placeholder="+91 98765 43210"></label>
 <label class="fl">Monthly invoice volume<select class="f" name="volume"><option>Under 1,000</option><option>1,000 – 5,000</option><option>5,000 – 20,000</option><option>Over 20,000</option></select></label>
 <label class="fl">Your ERP<select class="f" name="erp"><option>SAP</option><option>Oracle NetSuite</option><option>Microsoft Dynamics</option><option>Tally Prime</option><option>Zoho Books</option><option>Coupa</option><option>QuickBooks</option><option>Other</option></select></label>
-<label class="fl full">Anything else we should know?<textarea class="f" name="message" rows="3" style="resize:vertical"></textarea></label>
+<label class="fl full">Anything else we should know?<textarea class="f" name="message" rows="4" style="resize:vertical" placeholder="Current challenges, timelines, number of entities…"></textarea></label>
+<label class="hp" aria-hidden="true">Leave blank<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
 <p class="err full" id="formErr" role="alert"></p>
 <div class="full"><button type="submit" class="btn btn-n" style="width:100%">Get your custom FTE quote</button></div>
 </form>
@@ -745,7 +751,24 @@ form .full{grid-column:1/-1}
     n.classList.toggle('bad', !okN); m.classList.toggle('bad', !okM);
     if (!okN) bad.push('your name'); if (!okM) bad.push('a valid work email');
     if (bad.length) { err.textContent = 'Please add ' + bad.join(' and ') + '.'; (okN ? m : n).focus(); return; }
-    err.textContent = ''; wrap.classList.add('sent');
+    if (form.elements.namedItem('_honey').value) return;
+    err.textContent = '';
+    var btn = form.querySelector('button[type=submit]'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    var d = {};
+    ['fullname','email','company','phone','volume','erp','message'].forEach(function (k) { d[k] = form.elements.namedItem(k).value.trim(); });
+    var body = {
+      _subject: 'New website enquiry: ' + d.fullname + (d.company ? ' (' + d.company + ')' : ''),
+      _replyto: d.email, _template: 'table', _captcha: 'false',
+      'Full name': d.fullname, 'Work email': d.email, 'Company': d.company || '-', 'Phone': d.phone || '-',
+      'Monthly invoice volume': d.volume, 'ERP': d.erp, 'Message': d.message || '-'
+    };
+    fetch('https://formsubmit.co/ajax/support@arcturusridge.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body)
+    }).then(function (r) { return r.json().then(function (j) { if (!r.ok || String(j.success) === 'false') throw new Error(j.message || 'fail'); }); })
+      .then(function () { wrap.classList.add('sent'); })
+      .catch(function () { err.innerHTML = 'Sorry, that didn\u2019t send. Please email <a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a> or call <a href="tel:+917358047186">+91 73580 47186</a>.'; })
+      .then(function () { btn.disabled = false; btn.textContent = label; });
   });
   $('#again').addEventListener('click', function () { form.reset(); wrap.classList.remove('sent'); });
 
