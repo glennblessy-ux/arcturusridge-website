@@ -403,14 +403,14 @@ textarea.f{min-height:110px;line-height:1.5}
 <div class="calc rv">
 <div class="calc-in">
 <div class="field"><label for="cStaff">People in your AP team today <output id="oStaff">4</output></label><input type="range" id="cStaff" min="1" max="40" value="4"><span class="hint">Staff who process invoices, match POs and handle vendor queries.</span></div>
-<div class="field"><label for="cCost">Monthly cost per person <output id="oCost">₹60,000</output></label><input type="range" id="cCost" min="20000" max="300000" step="5000" value="60000"><span class="hint">Include salary, benefits, office space and training.</span></div>
+<div class="field"><label for="cCost">Monthly cost per person <output id="oCost">₹35,000</output></label><input type="range" id="cCost" min="20000" max="300000" step="5000" value="35000"><span class="hint">Include salary, benefits, office space and training.</span></div>
 <div class="field"><label for="cSave">Expected reduction <output id="oSave">60%</output></label><input type="range" id="cSave" min="20" max="60" step="5" value="60"><span class="hint">Up to 60% reduction in invoice processing costs.</span></div>
 </div>
 <div class="calc-out" aria-live="polite">
 <span class="lbl">Estimated yearly saving</span>
-<span class="big" id="rYear">₹17,28,000</span>
-<div class="row"><span>Current AP cost per month</span><b id="rNow">₹2,40,000</b></div>
-<div class="row"><span>Estimated monthly saving</span><b id="rMonth">₹1,44,000</b></div>
+<span class="big" id="rYear">₹10,08,000</span>
+<div class="row"><span>Current AP cost per month</span><b id="rNow">₹1,40,000</b></div>
+<div class="row"><span>Estimated monthly saving</span><b id="rMonth">₹84,000</b></div>
 <p class="note">An indicative estimate only. Share your invoice volume and we'll build an exact FTE and savings model for you.</p>
 <a href="#contact" class="btn btn-g">Get my custom savings model</a>
 </div>
@@ -593,7 +593,7 @@ textarea.f{min-height:110px;line-height:1.5}
 <p class="lead">Tell us your monthly invoice volume and ERP. We'll reply within 24 hours with a per-FTE quote and sample specialist profiles.</p>
 <div style="margin-top:4px">
 <div class="crow"><span>Email</span><a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a></div>
-<div class="crow"><span>Phone</span><a href="tel:+917358047186">+91 73580 47186</a></div>
+<div class="crow"><span>Phone</span><a href="tel:+917806894099">+91 78068 94099</a></div>
 </div>
 <div class="photo"><img src="assets/office.jpg" alt="A navy and brass meeting room seen through ribbed glass"></div>
 </div>
@@ -645,7 +645,7 @@ textarea.f{min-height:110px;line-height:1.5}
 <div style="display:flex;flex-direction:column;gap:20px"><img class="ft-logo" src="assets/logo-full-white.svg" alt="ArcturusRidge Corporate Services"><p style="max-width:320px;font-size:14px">Your dedicated accounts payable team — working inside your ERP from Day 1.</p></div>
 <div><h4>Explore</h4><div style="display:flex;flex-direction:column"><a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div></div>
 <div><h4>Get started</h4><div style="display:flex;flex-direction:column"><a href="#contact">Free AP audit</a><a href="#savings">Savings calculator</a><a href="#contact">Custom FTE quote</a></div></div>
-<div><h4>Contact</h4><p style="font-size:14px;line-height:1.9"><a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a><br><a href="tel:+917358047186">+91 73580 47186</a></p></div>
+<div><h4>Contact</h4><p style="font-size:14px;line-height:1.9"><a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a><br><a href="tel:+917806894099">+91 78068 94099</a></p></div>
 </div>
 <div class="ft-bot"><span>© 2026 ArcturusRidge Corporate Services Private Limited</span><span>Managed Accounts Payable</span></div>
 </div>
@@ -767,7 +767,7 @@ textarea.f{min-height:110px;line-height:1.5}
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body)
     }).then(function (r) { return r.json().then(function (j) { if (!r.ok || String(j.success) === 'false') throw new Error(j.message || 'fail'); }); })
       .then(function () { wrap.classList.add('sent'); })
-      .catch(function () { err.innerHTML = 'Sorry, that didn\u2019t send. Please email <a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a> or call <a href="tel:+917358047186">+91 73580 47186</a>.'; })
+      .catch(function () { err.innerHTML = 'Sorry, that didn\u2019t send. Please email <a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a> or call <a href="tel:+917806894099">+91 78068 94099</a>.'; })
       .then(function () { btn.disabled = false; btn.textContent = label; });
   });
   $('#again').addEventListener('click', function () { form.reset(); wrap.classList.remove('sent'); });
