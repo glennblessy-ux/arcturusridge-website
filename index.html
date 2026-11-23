@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArcturusRidge — Your Dedicated Accounts Payable Team</title>
+<meta name="description" content="ArcturusRidge manages your end-to-end accounts payable inside your existing ERP — invoice capture, 3-way matching, vendor reconciliations and tax compliance.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#13294A; --navy3:#081629;
+  --gold:#C9A24A; --gold-line:#B39B5F; --gold-ink:#8A6F2E; --gold-soft:#FBF7EC;
+  --ink:#111; --mute:#5A6270; --body:#3A4250; --line:#E3E5E8; --stone:#F6F5F1;
+  --g:clamp(18px,3vw,48px); --max:1240px; --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Montserrat',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+a{color:var(--navy)}
+img,video{display:block;max-width:100%}
+h1,h2,h3,p{margin:0}
+button,input,select,textarea{font:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--navy);color:#fff;padding:12px 16px;border-radius:8px}
+.skip:focus{top:8px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* type */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink)}
+.eyebrow::before{content:'';width:24px;height:1px;background:currentColor}
+.dark .eyebrow,.navybg .eyebrow{color:var(--gold)}
+.h1{font-size:clamp(36px,5.2vw,68px);font-weight:600;letter-spacing:-.035em;line-height:1.06}
+.h2{font-size:clamp(28px,3.4vw,44px);font-weight:600;letter-spacing:-.03em;line-height:1.12;color:var(--navy)}
+.navybg .h2,.dark .h2{color:#fff}
+.h3{font-size:19px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--navy)}
+.lead{font-size:clamp(16.5px,1.35vw,18.5px);color:var(--body);line-height:1.7}
+.dark .lead,.navybg .lead{color:#C8D1DE}
+.gold{color:var(--gold-ink)}
+.dark .gold,.navybg .gold{color:var(--gold)}
+.small{font-size:13.5px;color:var(--mute)}
+
+/* header */
+.hd{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+.hd.shadow{box-shadow:0 8px 24px -18px rgba(11,31,58,.4)}
+.hd-in{max-width:var(--max);margin:0 auto;padding:0 var(--g);height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;min-height:44px}
+.brand img{height:44px;width:auto}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{position:relative;color:var(--navy);text-decoration:none;font-size:14.5px;font-weight:500;display:inline-flex;align-items:center;min-height:44px;padding:0 14px}
+.nav a:not(.btn)::after{content:'';position:absolute;left:14px;right:14px;bottom:8px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .3s var(--ease)}
+.nav a:not(.btn):hover::after,.nav a[aria-current=page]::after{transform:scaleX(1)}
+.nav .btn{margin-left:10px}
+.menu-btn{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.menu-btn span{width:18px;height:2px;background:var(--navy);transition:transform .3s var(--ease)}
+.menu-open .menu-btn span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-open .menu-btn span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.mmenu{position:fixed;inset:72px 0 0 0;z-index:55;background:var(--navy);padding:28px var(--g);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.menu-open .mmenu{opacity:1;visibility:visible}
+.mmenu a:not(.btn){color:#fff;text-decoration:none;font-size:28px;font-weight:600;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mmenu .btn{margin-top:28px;align-self:flex-start}
+@media (max-width:900px){.nav{display:none}.menu-btn{display:flex}.brand img{height:38px}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 26px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:600;border:0;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s,transform .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{transition:transform .25s}
+.btn:hover svg{transform:translateX(3px)}
+.btn-n{background:var(--navy);color:#fff}
+.btn-n:hover{background:var(--navy2);color:#fff;box-shadow:0 12px 26px -12px rgba(11,31,58,.55)}
+.btn-g{background:var(--gold);color:var(--navy)}
+.btn-g:hover{background:#D6B05A;color:var(--navy);box-shadow:0 12px 28px -12px rgba(201,162,74,.8)}
+.btn-o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.btn-o:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.06)}
+.btn-ol{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-ol:hover{background:var(--navy);color:#fff}
+.nav a.btn{min-height:44px;padding:0 20px;font-size:14px;color:#fff}
+.nav a.btn:hover{color:#fff}
+
+/* pages */
+.page{display:none}
+.page.active{display:block;animation:pagein .5s var(--ease)}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* sections */
+.sec{padding:clamp(72px,9vw,120px) 0}
+.sec.tight{padding:clamp(56px,7vw,88px) 0}
+.stone{background:var(--stone)}
+.navybg{background:var(--navy);color:#fff}
+.head{max-width:760px;display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(36px,4.5vw,56px)}
+.head.center{margin-left:auto;margin-right:auto;text-align:center;align-items:center}
+
+/* dark media */
+.dark{position:relative;overflow:hidden;background:var(--navy3);color:#fff;isolation:isolate}
+.dark .bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center}
+.dark video.bg{width:100%;height:100%;object-fit:cover}
+.dark::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(95deg,rgba(8,22,41,.92) 0%,rgba(8,22,41,.7) 50%,rgba(8,22,41,.35) 100%)}
+
+/* hero */
+.hero{min-height:min(820px,calc(100vh - 72px));display:flex;align-items:center}
+.hero .wrap{width:100%;padding-top:72px;padding-bottom:72px}
+.hero .txt{max-width:720px;display:flex;flex-direction:column;gap:22px}
+.hero video.bg{object-position:64% center}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.hero .in{opacity:0;transform:translateY(18px);animation:heroin .9s var(--ease) forwards}
+.hero .in:nth-child(2){animation-delay:.1s}.hero .in:nth-child(3){animation-delay:.2s}.hero .in:nth-child(4){animation-delay:.3s}
+@keyframes heroin{to{opacity:1;transform:none}}
+@media (max-width:900px){.hero video.bg{object-position:61% center}.dark::after{background:linear-gradient(180deg,rgba(8,22,41,.55),rgba(8,22,41,.9))}}
+
+/* trust strip */
+.trust{background:var(--navy);color:#fff}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.tstat{padding:34px 24px;border-left:1px solid rgba(255,255,255,.1)}
+.tstat:first-child{border-left:0;padding-left:0}
+.tstat .n{display:block;font-size:clamp(32px,3.4vw,44px);font-weight:600;letter-spacing:-.03em;line-height:1.05;color:var(--gold);font-variant-numeric:tabular-nums}
+.tstat span{display:block;margin-top:8px;font-size:14px;color:#C8D1DE;line-height:1.45}
+@media (max-width:900px){.trust .wrap{grid-template-columns:1fr 1fr}.tstat{border-left:0;padding-left:0;border-top:1px solid rgba(255,255,255,.1)}.tstat:nth-child(-n+2){border-top:0}}
+
+/* cards */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1000px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s,transform .4s var(--ease),box-shadow .4s var(--ease)}
+.card:hover{border-color:var(--gold-line);transform:translateY(-4px);box-shadow:0 22px 44px -30px rgba(11,31,58,.45)}
+.card p{font-size:15px;color:var(--mute);line-height:1.6}
+.ico{width:48px;height:48px;border-radius:12px;background:var(--gold-soft);color:var(--gold-ink);display:flex;align-items:center;justify-content:center;flex:none}
+.card .num{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--gold-ink)}
+.stone .card{border-color:#E8E6DF}
+
+/* split */
+.split{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,6vw,88px);align-items:start}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.sticky{position:sticky;top:110px;display:flex;flex-direction:column;gap:18px}
+@media (max-width:900px){.sticky{position:static}}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.list li .ico{width:44px;height:44px;border-radius:50%}
+.list b{display:block;color:var(--navy);font-size:16.5px;margin-bottom:4px}
+.list p{font-size:15px;color:var(--mute)}
+
+/* ERP chips */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{padding:12px 20px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:15px;color:var(--navy)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 30px 60px -40px rgba(11,31,58,.45)}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.calc-in{padding:clamp(26px,3.5vw,44px);display:flex;flex-direction:column;gap:26px}
+.field{display:flex;flex-direction:column;gap:10px}
+.field label{font-size:14px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;gap:12px}
+.field label output{color:var(--gold-ink);font-weight:700}
+.field input[type=range]{width:100%;accent-color:var(--navy);height:28px}
+.field .hint{font-size:12.5px;color:var(--mute)}
+.calc-out{background:var(--navy);color:#fff;padding:clamp(26px,3.5vw,44px);display:flex;flex-direction:column;justify-content:center;gap:10px}
+.calc-out .lbl{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.calc-out .big{font-size:clamp(36px,4.4vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.calc-out .row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.12);font-size:15px;color:#C8D1DE}
+.calc-out .row b{color:#fff;font-variant-numeric:tabular-nums}
+.calc-out .note{font-size:12.5px;color:#9AA7BA;margin-top:4px}
+.calc-out .btn{margin-top:14px;align-self:flex-start}
+
+/* CTA banner */
+.banner{position:relative;overflow:hidden;border-radius:16px;color:#fff;padding:clamp(40px,6vw,80px);isolation:isolate;background:var(--navy3)}
+.banner video,.banner .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.banner::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(95deg,rgba(8,22,41,.94),rgba(8,22,41,.72) 60%,rgba(8,22,41,.5))}
+.banner .in{max-width:640px;display:flex;flex-direction:column;gap:18px}
+.banner .h2{color:#fff}.banner .lead{color:#C8D1DE}
+
+/* page head */
+.phead{padding:clamp(56px,7vw,96px) 0 clamp(40px,5vw,64px);background:var(--stone);border-bottom:1px solid var(--line)}
+.phead .wrap{display:flex;flex-direction:column;gap:18px;max-width:calc(var(--max));}
+.phead .lead{max-width:720px}
+.band{position:relative;height:clamp(200px,24vw,340px);overflow:hidden;background:var(--navy)}
+.band video,.band img{width:100%;height:100%;object-fit:cover;object-position:center 0%}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:28px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.step .k{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.step p{font-size:15px;color:var(--mute)}
+.step ul{margin:0;padding:0 0 0 18px;font-size:14.5px;color:var(--mute)}
+.step li{margin:4px 0}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.timeline::before{content:'';position:absolute;left:22px;right:22px;top:22px;height:2px;background:rgba(255,255,255,.14)}
+.timeline .fill{position:absolute;left:22px;top:22px;height:2px;width:0;background:var(--gold);transition:width 1.8s var(--ease)}
+.timeline.on .fill{width:calc(100% - 44px)}
+.tl{position:relative;display:flex;flex-direction:column;gap:10px}
+.tl .k{width:46px;height:46px;border-radius:50%;background:var(--navy);border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700}
+.tl b{font-size:17px;color:#fff;margin-top:8px}
+.tl p{font-size:14.5px;color:#C8D1DE}
+@media (max-width:900px){.timeline{grid-template-columns:1fr 1fr}.timeline::before,.timeline .fill{display:none}}
+@media (max-width:560px){.timeline{grid-template-columns:1fr}}
+
+/* quote */
+.quote{max-width:900px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+.quote q{quotes:none;font-size:clamp(24px,2.8vw,36px);font-weight:500;letter-spacing:-.02em;line-height:1.35;color:var(--navy)}
+.quote img{width:56px}
+
+/* tables */
+.tbl-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:18px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{background:var(--stone);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+tbody th{font-weight:600;color:var(--navy);width:22%}
+td.ours,th.ours{background:var(--gold-soft)}
+thead th.ours{background:var(--navy);color:var(--gold)}
+td.ours{color:var(--navy);font-weight:600}
+td small{display:block;font-size:13px;color:var(--mute);margin-top:4px;font-weight:400}
+.tgt{display:inline-block;padding:4px 10px;border-radius:6px;background:var(--gold-soft);color:var(--navy);font-weight:700;font-size:14px}
+@media (max-width:760px){
+  .tbl-wrap{border:0;background:none}
+  table,thead,tbody,tr,th,td{display:block;width:100%}
+  thead{display:none}
+  tr{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden;background:#fff}
+  tbody th{width:100%;background:var(--stone)}
+  td{border-bottom:1px solid var(--line)}
+  td[data-l]::before{content:attr(data-l);display:block;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+}
+
+/* included */
+.inc{display:flex;gap:16px;padding:24px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+.inc .ico{background:rgba(201,162,74,.14);color:var(--gold)}
+.inc b{display:block;color:#fff;margin-bottom:4px}
+.inc p{font-size:14.5px;color:#C8D1DE}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,5vw,72px);align-items:start}
+@media (max-width:900px){.contact{grid-template-columns:1fr}}
+.cinfo{display:flex;flex-direction:column;gap:20px}
+.cinfo .photo{border-radius:12px;overflow:hidden;aspect-ratio:4/3;margin-top:8px}
+.cinfo .photo img{width:100%;height:100%;object-fit:cover}
+.crow{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.crow span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);padding-top:2px}
+.formcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3.5vw,40px);box-shadow:0 30px 60px -44px rgba(11,31,58,.5)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form .full{grid-column:1/-1}
+@media (max-width:560px){form{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;font-size:13.5px;font-weight:600;color:var(--navy)}
+.f{width:100%;min-height:50px;padding:12px 14px;border:1px solid #CDD1D6;border-radius:8px;background:#fff;color:var(--ink);font-size:15.5px;font-weight:500;transition:border-color .2s,box-shadow .2s}
+.f:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.2)}
+.f.bad{border-color:#B3261E}
+.err{font-size:13.5px;color:#B3261E;min-height:20px}
+.thanks{display:none;flex-direction:column;gap:16px;align-items:flex-start}
+.sent form{display:none}.sent .thanks{display:flex;animation:pagein .6s var(--ease)}
+.tick{width:56px;height:56px;border-radius:50%;background:var(--gold-soft);color:var(--gold-ink);display:flex;align-items:center;justify-content:center}
+
+/* faq */
+.faq{border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;background:none;border:0;cursor:pointer;text-align:left;font-size:17px;font-weight:600;color:var(--navy)}
+.qa .pm{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);position:relative;transition:background .25s,border-color .25s}
+.qa .pm::before,.qa .pm::after{content:'';position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:var(--navy);transition:transform .3s var(--ease)}
+.qa .pm::after{transform:rotate(90deg)}
+.qa.open .pm{background:var(--gold);border-color:var(--gold)}
+.qa.open .pm::after{transform:rotate(0)}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+.qa.open .ans{grid-template-rows:1fr}
+.qa .ans>div{overflow:hidden}
+.qa .ans p{padding:0 50px 22px 0;color:var(--body);font-size:15.5px}
+
+/* footer */
+.ft{background:var(--navy3);color:#C8D1DE;padding:clamp(56px,7vw,88px) 0 26px}
+.ft-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:36px}
+@media (max-width:900px){.ft-grid{grid-template-columns:1fr 1fr}}
+.ft-logo{width:230px;max-width:100%}
+.ft h4{margin:0 0 14px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.ft a{color:#fff;text-decoration:none;display:inline-flex;min-height:36px;align-items:center;font-size:14.5px}
+.ft a:hover{color:var(--gold)}
+.ft-bot{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12.5px;color:#8C99AC}
+.totop{position:fixed;right:18px;bottom:18px;z-index:50;width:48px;height:48px;border-radius:50%;border:0;background:var(--navy);color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 10px 24px -10px rgba(11,31,58,.6)}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.hero .in{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hd" id="hd">
+<div class="hd-in">
+<a href="#home" class="brand" aria-label="ArcturusRidge home"><img src="assets/logo-horizontal-navy.svg" alt="ArcturusRidge Corporate Services"></a>
+<nav class="nav" aria-label="Main">
+<a href="#home" data-nav="home">Home</a>
+<a href="#how-it-works" data-nav="how-it-works">How it works</a>
+<a href="#pricing" data-nav="pricing">Pricing</a>
+<a href="#contact" data-nav="contact">Contact &amp; FAQ</a>
+<a href="#contact" class="btn btn-n">Free AP audit</a>
+</nav>
+<button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu"><span></span><span></span></button>
+</div>
+</header>
+<nav class="mmenu" id="mmenu" aria-label="Mobile">
+<a href="#home">Home</a>
+<a href="#how-it-works">How it works</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact &amp; FAQ</a>
+<a href="#contact" class="btn btn-g">Request a free AP audit</a>
+</nav>
+
+<main id="main">
+
+<!-- ================= HOME ================= -->
+<div class="page" data-page="home">
+
+<section class="dark hero">
+<div class="bg" style="background-image:url(assets/hero.jpg)"></div>
+<video class="bg" id="heroVideo" src="assets/hero.mp4" poster="assets/hero.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<div class="wrap">
+<div class="txt">
+<span class="eyebrow in">Managed Accounts Payable</span>
+<h1 class="h1 in">Your dedicated Accounts Payable team. <span class="gold">Zero software migration required.</span></h1>
+<p class="lead in">We manage your end-to-end AP operations — from invoice capture and 3-way matching to vendor reconciliations and tax compliance — so your finance team can focus on strategic growth.</p>
+<div class="ctas in">
+<a href="#contact" class="btn btn-g">Request a free AP process audit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a href="#savings" class="btn btn-o">Calculate your cost savings</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="trust" aria-label="Key results">
+<div class="wrap">
+<div class="tstat rv"><span class="n" data-count="60" data-pre="Up to " data-suf="%">Up to 60%</span><span>Reduction in invoice processing costs</span></div>
+<div class="tstat rv d1"><span class="n">&lt; 24 hrs</span><span>From invoice receipt to approval routing</span></div>
+<div class="tstat rv d2"><span class="n">Zero</span><span>Duplicate payments, via automated 3-way matching</span></div>
+<div class="tstat rv d3"><span class="n" data-count="100" data-suf="%">100%</span><span>Audit-ready digital trail for every transaction</span></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Why us</span><h2 class="h2">Why choose a pure managed AP service?</h2></div>
+<div class="grid g4">
+<div class="card rv"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h3 class="h3">No new tech stack</h3><p>Our specialists work inside your current ERP — SAP, Oracle, NetSuite, Dynamics, Tally Prime or Zoho Books — from Day 1.</p></div>
+<div class="card rv d1"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M17 11l2 2 4-4"/></svg></span><h3 class="h3">Human judgment + process rigour</h3><p>Software struggles with messy exceptions, partial deliveries and vendor disputes. Our trained AP analysts resolve them directly.</p></div>
+<div class="card rv d2"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><h3 class="h3">Elastic scalability</h3><p>Scale capacity for month-end closes, peak seasons or rapid growth — without hiring or training full-time staff.</p></div>
+<div class="card rv d3"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3 class="h3">100% payment control</h3><p>We prepare, match and validate every voucher. Your finance leaders keep final bank authorisation.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec stone">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">What we do</span><h2 class="h2">Core services</h2></div>
+<div class="grid g3" id="svcGrid">
+<div class="card rv"><span class="num">01</span><h3 class="h3">Invoice capture &amp; digitisation</h3><p>Multi-channel intake — email, EDI, vendor portals and paper — using OCR and automated data extraction with 99.9% accuracy.</p></div>
+<div class="card rv d1"><span class="num">02</span><h3 class="h3">2-way &amp; 3-way matching</h3><p>Automated checks against Purchase Orders and Goods Receipt Notes to block duplicate billing, price variances and unapproved spend.</p></div>
+<div class="card rv d2"><span class="num">03</span><h3 class="h3">Exception handling &amp; vendor helpdesk</h3><p>Dedicated specialists resolve discrepancies directly with your suppliers — no more endless email chains for your team.</p></div>
+<div class="card rv"><span class="num">04</span><h3 class="h3">Payment scheduling &amp; execution</h3><p>Timely batch processing (NEFT/RTGS, ACH, wire, virtual cards) aligned with your cash-flow goals and early-payment discount windows.</p></div>
+<div class="card rv d1"><span class="num">05</span><h3 class="h3">Tax compliance &amp; audit readiness</h3><p>Built-in validation for GST/TDS (India), W-9/1099 (US) or VAT, with digital audit trails and monthly vendor statement reconciliations.</p></div>
+<a href="#how-it-works" class="card rv d2" style="background:var(--navy);border-color:var(--navy);text-decoration:none;justify-content:space-between"><span class="num" style="color:var(--gold)">How it works</span><h3 class="h3" style="color:#fff">See how AI and our specialists process every invoice</h3><span style="color:var(--gold);font-weight:600;font-size:14.5px">Learn more →</span></a>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap split">
+<div class="sticky rv">
+<span class="eyebrow">You stay in control</span>
+<h2 class="h2">Outsourcing AP doesn't mean losing control. It means gaining visibility.</h2>
+<p class="lead">We handle the administrative work. You keep 100% of the financial decisions.</p>
+</div>
+<ul class="list">
+<li class="rv"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M17 6l3 3"/></svg></span><div><b>You hold the final approval key</b><p>No invoice is paid without your sign-off. We route clean, verified invoices to your approvers for one-click authorisation.</p></div></li>
+<li class="rv"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/></svg></span><div><b>Your rules, enforced</b><p>You set approval thresholds (e.g. invoices over ₹50,000 need CFO sign-off), payment schedules and vendor terms — we follow them exactly.</p></div></li>
+<li class="rv"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15v-3M12 15V9M17 15v-5"/></svg></span><div><b>Live dashboard, 24/7</b><p>See every invoice's status — pending, approved or scheduled for payment — any time you log in.</p></div></li>
+<li class="rv"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span><div><b>Audit trails &amp; fraud prevention</b><p>Every edit and approval is time-stamped. The person entering an invoice is never the person approving the funds.</p></div></li>
+<li class="rv"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div><b>Smarter cash flow</b><p>With clear sight of upcoming liabilities, you decide when cash leaves — capture early-payment discounts or hold working capital longer.</p></div></li>
+</ul>
+</div>
+</section>
+
+<section class="sec tight stone">
+<div class="wrap" style="display:flex;flex-direction:column;gap:28px">
+<div class="head rv" style="margin-bottom:0"><span class="eyebrow">Compatibility</span><h2 class="h2">Seamless integration with your existing tech stack</h2><p class="lead">No need to migrate systems. Our team works directly inside your environment.</p></div>
+<div class="chips rv d1"><span>SAP</span><span>Oracle NetSuite</span><span>Microsoft Dynamics</span><span>Tally Prime</span><span>Zoho Books</span><span>Coupa</span><span>QuickBooks</span></div>
+</div>
+</section>
+
+<section class="sec" id="savings">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Cost savings</span><h2 class="h2">Calculate your cost savings</h2><p class="lead">Move the sliders to match your current AP team. See what you could save with a dedicated FTE model.</p></div>
+<div class="calc rv">
+<div class="calc-in">
+<div class="field"><label for="cStaff">People in your AP team today <output id="oStaff">4</output></label><input type="range" id="cStaff" min="1" max="40" value="4"><span class="hint">Staff who process invoices, match POs and handle vendor queries.</span></div>
+<div class="field"><label for="cCost">Monthly cost per person <output id="oCost">₹60,000</output></label><input type="range" id="cCost" min="20000" max="300000" step="5000" value="60000"><span class="hint">Include salary, benefits, office space and training.</span></div>
+<div class="field"><label for="cSave">Expected reduction <output id="oSave">60%</output></label><input type="range" id="cSave" min="20" max="60" step="5" value="60"><span class="hint">Up to 60% reduction in invoice processing costs.</span></div>
+</div>
+<div class="calc-out" aria-live="polite">
+<span class="lbl">Estimated yearly saving</span>
+<span class="big" id="rYear">₹17,28,000</span>
+<div class="row"><span>Current AP cost per month</span><b id="rNow">₹2,40,000</b></div>
+<div class="row"><span>Estimated monthly saving</span><b id="rMonth">₹1,44,000</b></div>
+<p class="note">An indicative estimate only. Share your invoice volume and we'll build an exact FTE and savings model for you.</p>
+<a href="#contact" class="btn btn-g">Get my custom savings model</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" style="padding-top:0">
+<div class="wrap">
+<div class="banner rv">
+<video class="loop" src="assets/towers.mp4" poster="assets/towers.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+<div class="in">
+<h2 class="h2">Stop paying full-time overhead for manual invoice processing.</h2>
+<p class="lead">Tell us your monthly invoice volume, and we'll build a custom FTE and cost-savings model for your finance team.</p>
+<div class="ctas"><a href="#contact" class="btn btn-g">Book a 15-minute consultation</a></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ================= HOW IT WORKS ================= -->
+<div class="page" data-page="how-it-works">
+<section class="phead">
+<div class="wrap">
+<span class="eyebrow">How it works</span>
+<h1 class="h1" style="color:var(--navy);max-width:900px">AI-accelerated processing, backed by <span class="gold">dedicated AP specialists.</span></h1>
+<p class="lead">Pure software leaves your team stuck on messy exceptions. Pure manual entry slows your month-end close. We pair AI data extraction with your own dedicated AP team.</p>
+</div>
+</section>
+<div class="band" role="img" aria-label="A gold star over a mountain ridge"><video class="loop" src="assets/ridge-star.mp4" poster="assets/ridge-star.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+
+<section class="sec">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">The process</span><h2 class="h2">How every invoice is processed, in 4 stages</h2></div>
+<div class="steps">
+<div class="step rv"><span class="k">1</span><h3 class="h3">Capture &amp; extract</h3><p>AI reads invoices from email, PDFs, scanned paper and EDI — vendor name, invoice number, GSTIN/tax ID, due date and every line item.</p></div>
+<div class="step rv d1"><span class="k">2</span><h3 class="h3">Code &amp; validate tax</h3><p>GL codes and cost centres are predicted from your history. GSTIN, HSN/SAC and e-invoice QR codes (or W-9/VAT) are checked automatically.</p></div>
+<div class="step rv d2"><span class="k">3</span><h3 class="h3">Match 2-way / 3-way</h3><p>Invoice lines are checked against POs and GRNs in your ERP. Clean matches go for approval; variances and duplicates are held for review.</p></div>
+<div class="step rv d3"><span class="k">4</span><h3 class="h3">Specialist review</h3><p>When the AI isn't sure — a blurry scan or complex terms — your dedicated AP specialist steps in, resolves it and helps the AI improve.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec stone">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">The benefits</span><h2 class="h2">AI speed. Human judgment.</h2></div>
+<div class="grid g3">
+<div class="card rv"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><h3 class="h3">3× higher throughput per FTE</h3><p>AI handles routine invoices in seconds, so your specialists process more volume without adding headcount.</p></div>
+<div class="card rv d1"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><h3 class="h3">No software licences for you</h3><p>We use AI-assisted workflows internally and post clean, verified entries straight into your existing ERP.</p></div>
+<div class="card rv d2"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3 class="h3">Duplicate &amp; fraud shield</h3><p>Duplicate invoice numbers, altered bank details and tax errors are caught before anything reaches your approval queue.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec navybg">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Getting started</span><h2 class="h2">Our 4-step transition — no disruption to your daily operations</h2></div>
+<div class="timeline rv" id="timeline"><span class="fill"></span>
+<div class="tl"><span class="k">1</span><b>Discovery &amp; SOP mapping</b><p>We document your approval matrix, chart of accounts and compliance rules.</p></div>
+<div class="tl"><span class="k">2</span><b>Secure system access</b><p>Our team connects via VPN/VDI with role-based permissions — never holding your funds.</p></div>
+<div class="tl"><span class="k">3</span><b>Shadowing &amp; go-live</b><p>2–4 weeks of parallel processing to verify accuracy, then we take over daily queues under SLAs.</p></div>
+<div class="tl"><span class="k">4</span><b>Daily processing &amp; reports</b><p>You get daily throughput logs, ageing summaries and exception trackers.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap quote rv">
+<img src="assets/mark-navy.svg" alt="">
+<q>You aren't handing over your chequebook. You're hiring a dedicated engine to prepare the paperwork — so you can make faster, better-informed financial decisions.</q>
+<div class="ctas" style="justify-content:center"><a href="#pricing" class="btn btn-n">See our pricing model</a><a href="#contact" class="btn btn-ol">Request a free AP audit</a></div>
+</div>
+</section>
+</div>
+
+<!-- ================= PRICING ================= -->
+<div class="page" data-page="pricing">
+<section class="phead">
+<div class="wrap">
+<span class="eyebrow">Pricing model</span>
+<h1 class="h1" style="color:var(--navy);max-width:900px">One dedicated team. <span class="gold">One flat monthly rate per FTE.</span></h1>
+<p class="lead">Predictable costs, a team that works only for you, and no surcharges for complex exceptions.</p>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Compare</span><h2 class="h2">Why a dedicated FTE model beats in-house or per-invoice pricing</h2></div>
+<div class="tbl-wrap rv">
+<table>
+<thead><tr><th scope="col">Feature</th><th scope="col">In-house AP team</th><th scope="col">Per-invoice outsourcing</th><th scope="col" class="ours">Our dedicated FTE model</th></tr></thead>
+<tbody>
+<tr><th scope="row">Cost structure</th><td data-l="In-house">High fixed salaries, benefits, office and attrition costs</td><td data-l="Per-invoice">Unpredictable bills that spike in peak months</td><td class="ours" data-l="ArcturusRidge">Predictable, flat monthly rate per FTE</td></tr>
+<tr><th scope="row">Team focus</th><td data-l="In-house">Dedicated, but high turnover and training burden</td><td data-l="Per-invoice">Shared pool; agents juggle many clients</td><td class="ours" data-l="ArcturusRidge">100% dedicated to your account and SOPs</td></tr>
+<tr><th scope="row">Complex exceptions</th><td data-l="In-house">Handled internally</td><td data-l="Per-invoice">Often incur extra surcharge fees</td><td class="ours" data-l="ArcturusRidge">Included at no extra cost</td></tr>
+<tr><th scope="row">Scalability</th><td data-l="In-house">2–3 months to hire and onboard</td><td data-l="Per-invoice">Volume-based</td><td class="ours" data-l="ArcturusRidge">Add or flex FTEs in 2–3 weeks</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="sec stone">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Your team</span><h2 class="h2">Meet your dedicated AP pod</h2></div>
+<div class="grid g3">
+<div class="card rv"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h5"/></svg></span><h3 class="h3">Junior AP Associates</h3><span class="small" style="font-weight:600;color:var(--gold-ink)">Invoice processing &amp; indexing</span><p>Daily inbox management, PO/GRN 3-way matching, GL coding and tax checks (GST/TDS/W-9/VAT).</p></div>
+<div class="card rv d1"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><h3 class="h3">Senior AP Specialists</h3><span class="small" style="font-weight:600;color:var(--gold-ink)">Exceptions &amp; vendor helpdesk</span><p>Resolve price/quantity mismatches, manage vendor escalations and reconcile supplier statements monthly.</p></div>
+<div class="card rv d2"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8 11l2 2 4-4"/></svg></span><h3 class="h3">AP Team Lead / Quality Reviewer</h3><span class="small" style="font-weight:600;color:var(--gold-ink)">Included oversight</span><p>Maker-checker audits, daily SLA tracking and weekly ageing and throughput reports to your Controller.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec navybg">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">No hidden costs</span><h2 class="h2">What's included in every flat monthly FTE fee</h2></div>
+<div class="grid g2">
+<div class="inc rv"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><div><b>Zero recruitment &amp; training costs</b><p>Pre-vetted commerce and accounting graduates, trained on SAP, NetSuite, Dynamics, Tally and QuickBooks.</p></div></div>
+<div class="inc rv d1"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><div><b>Built-in continuity &amp; backup</b><p>Cross-trained shadow resources mean zero disruption during leave or holidays.</p></div></div>
+<div class="inc rv"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div><b>Enterprise security</b><p>ISO 27001 / SOC 2 workstations, encrypted VPN/VDI connectivity and strict NDAs.</p></div></div>
+<div class="inc rv d1"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Your time zone</b><p>Shifts aligned to your hours (IST, GMT, EST or PST) for real-time Slack or Teams collaboration.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Service levels</span><h2 class="h2">Committed SLA &amp; KPI benchmarks</h2><p class="lead">Every pod works to transparent SLAs, tracked in weekly and monthly MIS dashboards.</p></div>
+<div class="tbl-wrap rv">
+<table>
+<thead><tr><th scope="col">Process area</th><th scope="col">Committed target</th><th scope="col">What it means for you</th></tr></thead>
+<tbody>
+<tr><th scope="row">Invoice processing speed</th><td data-l="Target"><span class="tgt">≤ 24 business hours</span><small>≤ 4 hours for urgent bills · receipt to ERP entry and approval routing</small></td><td data-l="What it means">No processing backlogs or late-payment penalties</td></tr>
+<tr><th scope="row">Data &amp; coding accuracy</th><td data-l="Target"><span class="tgt">≥ 99.8%</span><small>Via 2-tier maker-checker audit</small></td><td data-l="What it means">Clean ledger entries and zero month-end rework</td></tr>
+<tr><th scope="row">3-way match verification</th><td data-l="Target"><span class="tgt">100%</span><small>Of PO-backed invoices, before booking</small></td><td data-l="What it means">Stops duplicate payouts, overbilling and unapproved spend</td></tr>
+<tr><th scope="row">Exception &amp; dispute resolution</th><td data-l="Target"><span class="tgt">≤ 24 business hours</span><small>First response to flag variances</small></td><td data-l="What it means">Bottlenecks cleared without clogging your inbox</td></tr>
+<tr><th scope="row">Vendor helpdesk</th><td data-l="Target"><span class="tgt">≤ 4 business hours</span><small>Within the agreed shift window</small></td><td data-l="What it means">Stronger vendor relationships, no distractions for your staff</td></tr>
+<tr><th scope="row">Vendor statement reconciliation</th><td data-l="Target"><span class="tgt">100% by business day 5</span><small>Top and active supplier ledgers, monthly</small></td><td data-l="What it means">Missing credits and duplicate bills found early</td></tr>
+<tr><th scope="row">Statutory &amp; tax compliance</th><td data-l="Target"><span class="tgt">100% pre-audit</span><small>GST/e-invoice, TDS, MSME 45-day rule, or W-9/VAT</small></td><td data-l="What it means">Protected input tax credits and audit-ready books</td></tr>
+<tr><th scope="row">Team continuity</th><td data-l="Target"><span class="tgt">100% continuity</span><small>Via cross-trained shadow FTEs</small></td><td data-l="What it means">No downtime during holidays, peak seasons or attrition</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="sec stone">
+<div class="wrap">
+<div class="head rv"><span class="eyebrow">Deployment</span><h2 class="h2">Your team, live in 3 simple steps</h2></div>
+<div class="grid g3">
+<div class="step rv"><span class="k">1</span><h3 class="h3">Volume &amp; scope sizing</h3><p>Share your monthly invoice count, ERP and backlog — we recommend the exact FTE headcount.</p></div>
+<div class="step rv d1"><span class="k">2</span><h3 class="h3">Select your team</h3><p>Review shortlisted AP profiles, approve your team and walk them through your approval matrix.</p></div>
+<div class="step rv d2"><span class="k">3</span><h3 class="h3">Go live under SLAs</h3><p>Your pod takes over daily queues within 2–3 weeks, reporting directly to your finance lead.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div class="banner rv">
+<img class="bgimg" src="assets/desk.jpg" alt="">
+<div class="in">
+<h2 class="h2">Ready to scale your AP team without expanding payroll?</h2>
+<p class="lead">Tell us your monthly invoice volume and ERP. We'll share a transparent per-FTE quote and sample specialist profiles within 24 hours.</p>
+<div class="ctas"><a href="#contact" class="btn btn-g">Get your custom FTE quote</a></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ================= CONTACT + FAQ ================= -->
+<div class="page" data-page="contact">
+<section class="sec" style="padding-bottom:clamp(56px,7vw,88px)">
+<div class="wrap contact">
+<div class="cinfo">
+<span class="eyebrow">Contact</span>
+<h1 class="h1" style="color:var(--navy);font-size:clamp(34px,4.4vw,56px)">Get your custom FTE quote</h1>
+<p class="lead">Tell us your monthly invoice volume and ERP. We'll reply within 24 hours with a per-FTE quote and sample specialist profiles.</p>
+<div style="margin-top:4px">
+<div class="crow"><span>Email</span>[YOUR EMAIL]</div>
+<div class="crow"><span>Phone</span>+91 [PHONE NUMBER]</div>
+<div class="crow"><span>Office</span>[REGISTERED OFFICE ADDRESS]</div>
+</div>
+<div class="photo"><img src="assets/office.jpg" alt="A navy and brass meeting room seen through ribbed glass"></div>
+</div>
+<div class="formcard" id="formWrap">
+<form id="form" novalidate>
+<div class="full"><h2 class="h3" style="font-size:22px">Request a free AP process audit</h2><p class="small" style="margin-top:4px">Takes under a minute. Fields marked * are required.</p></div>
+<label class="fl">Full name *<input class="f" type="text" name="fullname" autocomplete="name" required></label>
+<label class="fl">Work email *<input class="f" type="email" name="email" autocomplete="email" required></label>
+<label class="fl">Company<input class="f" type="text" name="company" autocomplete="organization"></label>
+<label class="fl">Phone<input class="f" type="tel" name="phone" autocomplete="tel"></label>
+<label class="fl">Monthly invoice volume<select class="f" name="volume"><option>Under 1,000</option><option>1,000 – 5,000</option><option>5,000 – 20,000</option><option>Over 20,000</option></select></label>
+<label class="fl">Your ERP<select class="f" name="erp"><option>SAP</option><option>Oracle NetSuite</option><option>Microsoft Dynamics</option><option>Tally Prime</option><option>Zoho Books</option><option>Coupa</option><option>QuickBooks</option><option>Other</option></select></label>
+<label class="fl full">Anything else we should know?<textarea class="f" name="message" rows="3" style="resize:vertical"></textarea></label>
+<p class="err full" id="formErr" role="alert"></p>
+<div class="full"><button type="submit" class="btn btn-n" style="width:100%">Get your custom FTE quote</button></div>
+</form>
+<div class="thanks" role="status">
+<span class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>
+<h2 class="h2">Thank you.</h2>
+<p class="lead">We'll be in touch within 24 hours with your custom FTE quote.</p>
+<button type="button" class="btn btn-ol" id="again">Send another request</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec stone" id="faq">
+<div class="wrap split">
+<div class="sticky"><span class="eyebrow">FAQ</span><h2 class="h2">Frequently asked questions</h2><p class="lead">Still unsure? <a href="#contact" data-top>Book a 15-minute consultation.</a></p></div>
+<div class="faq">
+<div class="qa"><button type="button" aria-expanded="false">Will our dedicated FTEs work on other client accounts?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>No. Every FTE assigned to your team works 100% exclusively on your account. They follow your SOPs, join your daily stand-ups on Slack or Microsoft Teams, and work as a direct extension of your finance team.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">Do we need to buy new AP software or change our ERP?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Not at all. As a pure managed service, our specialists work directly inside your existing ERP and accounting systems — including SAP, Oracle NetSuite, Microsoft Dynamics, Tally Prime, Zoho Books, Coupa and QuickBooks — from Day 1.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">How do we keep control over payments and bank approvals?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>You keep 100% custody and final authorisation over your funds. We handle invoice capture, GL coding, 3-way matching, tax checks and payment batch preparation; your leadership reviews and releases final payments from your bank portal.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">How is a per-FTE model better than per-invoice pricing?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Per-invoice models often add surcharges for complex exceptions, non-PO invoices, vendor queries and month-end reconciliations. A flat monthly per-FTE rate gives you predictable budgeting and a dedicated specialist who handles everything — with no extra transaction fees.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">What if our AP specialist goes on leave or resigns?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Your operations never pause. Every engagement includes cross-trained shadow resources at no extra cost. If someone leaves, we manage the replacement and knowledge transfer so your SLAs are unaffected.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">How do you keep our financial data secure?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Our delivery centres follow ISO 27001 / SOC 2 security protocols. Specialists sign binding NDAs, work from secure, monitored workstations, and connect to your ERP only through encrypted VPN or VDI with role-based access.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">How quickly can our AP team go live?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Most engagements go live in 2 to 3 weeks. We map your SOPs and approval matrix, set up secure ERP access, and run parallel processing with your team to verify 99.8%+ accuracy before full handover.</p></div></div></div>
+<div class="qa"><button type="button" aria-expanded="false">Can we scale the team up or down?<span class="pm" aria-hidden="true"></span></button><div class="ans"><div><p>Yes. Add FTEs for seasonal spikes, acquisitions or rapid growth with just a few weeks' notice — avoiding the 2-to-3-month delay and cost of in-house hiring.</p></div></div></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+<footer class="ft">
+<div class="wrap">
+<div class="ft-grid">
+<div style="display:flex;flex-direction:column;gap:20px"><img class="ft-logo" src="assets/logo-full-white.svg" alt="ArcturusRidge Corporate Services"><p style="max-width:320px;font-size:14px">Your dedicated accounts payable team — working inside your ERP from Day 1.</p></div>
+<div><h4>Explore</h4><div style="display:flex;flex-direction:column"><a href="#home">Home</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div></div>
+<div><h4>Get started</h4><div style="display:flex;flex-direction:column"><a href="#contact">Free AP audit</a><a href="#savings">Savings calculator</a><a href="#contact">Custom FTE quote</a></div></div>
+<div><h4>Contact</h4><p style="font-size:14px;line-height:1.9">[YOUR EMAIL]<br>+91 [PHONE NUMBER]<br>[REGISTERED OFFICE ADDRESS]</p></div>
+</div>
+<div class="ft-bot"><span>© 2026 ArcturusRidge Corporate Services Private Limited · CIN: [CIN NUMBER]</span><span>Managed Accounts Payable</span></div>
+</div>
+</footer>
+<button class="totop" id="totop" type="button" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var pages = {}; $$('.page').forEach(function (p) { pages[p.dataset.page] = p; });
+  // section anchors that live inside a page
+  var SECTIONS = { savings: 'home', faq: 'contact' };
+  var TITLES = { home: 'ArcturusRidge — Your Dedicated Accounts Payable Team', 'how-it-works': 'How it works — ArcturusRidge', pricing: 'Pricing — ArcturusRidge', contact: 'Contact & FAQ — ArcturusRidge' };
+  var current = null;
+
+  /* reveal on scroll */
+  function countUp(el) {
+    var to = +el.dataset.count, pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+    if (reduce) { el.textContent = pre + to + suf; return; }
+    var t0 = null;
+    function step(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3); el.textContent = pre + Math.round(to * e) + suf; if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('on');
+      var n = e.target.querySelector('[data-count]'); if (n && !n.dataset.done) { n.dataset.done = 1; countUp(n); }
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }) : null;
+  function arm(scope) { $$('.rv', scope).forEach(function (el) { if (el.classList.contains('on')) return; if (io && !reduce) io.observe(el); else el.classList.add('on'); }); }
+
+  /* loop videos: play only on screen */
+  if ('IntersectionObserver' in window && !reduce) {
+    var vio = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; v.muted = true; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }, { threshold: 0.05 });
+    $$('video.loop').forEach(function (v) { vio.observe(v); });
+  }
+
+  /* mobile menu */
+  var menuBtn = $('#menuBtn');
+  function setMenu(open) { document.body.classList.toggle('menu-open', open); document.body.classList.toggle('lock', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  /* router */
+  function route() {
+    var h = (location.hash || '').slice(1);
+    if (h === 'main') return;
+    var page = pages[h] ? h : (SECTIONS[h] || 'home');
+    var target = SECTIONS[h] ? document.getElementById(h) : null;
+    setMenu(false);
+    if (page !== current) {
+      Object.keys(pages).forEach(function (k) { pages[k].classList.toggle('active', k === page); });
+      $$('[data-nav]').forEach(function (a) { if (a.dataset.nav === page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+      current = page; document.title = TITLES[page];
+      arm(pages[page]);
+      var v = $('#heroVideo'); if (v) { if (page === 'home' && !reduce) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }
+      if (!target) window.scrollTo(0, 0);
+    }
+    if (target) setTimeout(function () { var y = target.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); }, 60);
+    else if (page === current && !pages[h] && !h) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  // clicking a link to the page you're already on scrolls to the top
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    var h = a.getAttribute('href').slice(1);
+    if (h === (location.hash || '#home').slice(1) && pages[h]) { e.preventDefault(); setMenu(false); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }
+    else if (h === (location.hash || '').slice(1) && SECTIONS[h]) { e.preventDefault(); route(); }
+  });
+
+  /* header + back to top */
+  var hd = $('#hd'), top = $('#totop');
+  window.addEventListener('scroll', function () { var y = window.scrollY; hd.classList.toggle('shadow', y > 8); top.classList.toggle('show', y > 900); }, { passive: true });
+  top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+  /* timeline fill */
+  var tl = $('#timeline');
+  if (tl && io) { var tio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { tl.classList.add('on'); tio.disconnect(); } }, { threshold: .3 }); tio.observe(tl); } else if (tl) tl.classList.add('on');
+
+  /* savings calculator */
+  var inr = function (n) { return '₹' + Math.round(n).toLocaleString('en-IN'); };
+  var cS = $('#cStaff'), cC = $('#cCost'), cP = $('#cSave');
+  function calc() {
+    var staff = +cS.value, cost = +cC.value, pct = +cP.value / 100, now = staff * cost, save = now * pct;
+    $('#oStaff').textContent = staff; $('#oCost').textContent = inr(cost); $('#oSave').textContent = cP.value + '%';
+    $('#rNow').textContent = inr(now); $('#rMonth').textContent = inr(save); $('#rYear').textContent = inr(save * 12);
+  }
+  [cS, cC, cP].forEach(function (el) { el.addEventListener('input', calc); }); calc();
+
+  /* FAQ */
+  $$('.qa').forEach(function (q) { var b = q.querySelector('button'); b.addEventListener('click', function () { var o = !q.classList.contains('open'); q.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }); });
+
+  /* form */
+  var form = $('#form'), wrap = $('#formWrap'), err = $('#formErr');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = form.elements.namedItem('fullname'), m = form.elements.namedItem('email'), bad = [];
+    var okN = !!n.value.trim(), okM = /^\S+@\S+\.\S+$/.test(m.value.trim());
+    n.classList.toggle('bad', !okN); m.classList.toggle('bad', !okM);
+    if (!okN) bad.push('your name'); if (!okM) bad.push('a valid work email');
+    if (bad.length) { err.textContent = 'Please add ' + bad.join(' and ') + '.'; (okN ? m : n).focus(); return; }
+    err.textContent = ''; wrap.classList.add('sent');
+  });
+  $('#again').addEventListener('click', function () { form.reset(); wrap.classList.remove('sent'); });
+
+  route();
+})();
+</script>
+</body>
+</html>
