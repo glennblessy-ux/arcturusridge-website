@@ -731,7 +731,7 @@ body{padding-bottom:70px}
 <p>Please don’t send us invoices, bank details or other sensitive financial records through the website form.</p>
 <h3>Information collected automatically</h3>
 <ul><li><strong>Server logs.</strong> Our hosting provider records technical data such as your IP address, browser type and the pages requested, for security and to keep the site running.</li><li><strong>Preferences stored on your device.</strong> We store your colour-theme and cookie choices in your browser’s local storage. These never leave your device.</li></ul>
-<p>We do not currently use advertising cookies or tracking pixels. We would only add analytics with your consent (see section 5).</p>
+<p>We do not use advertising cookies or tracking pixels. If you choose “Accept all” in the cookie banner, we also use Google Analytics to understand how visitors use the site (see section 5).</p>
 
 <h2 id="pp-use">3. How we use your information</h2>
 <table><thead><tr><th>Purpose</th><th>Legal basis</th></tr></thead><tbody>
@@ -744,7 +744,7 @@ body{padding-bottom:70px}
 
 <h2 id="pp-share">4. Who we share it with</h2>
 <p>We share information only with service providers who help us run this website and our communications, under contracts that require them to protect it:</p>
-<ul><li><strong>GitHub, Inc.</strong> (website hosting) — server logs;</li><li><strong>FormSubmit</strong> (form delivery) — the details you enter in the enquiry form, which it forwards to our mailbox;</li><li><strong>Microsoft Corporation</strong> (Microsoft 365 email) — enquiries and correspondence;</li><li><strong>Flagpedia / flagcdn.com</strong> — loads the country flag images in the phone field, which means your browser sends it your IP address.</li></ul>
+<ul><li><strong>GitHub, Inc.</strong> (website hosting) — server logs;</li><li><strong>FormSubmit</strong> (form delivery) — the details you enter in the enquiry form, which it forwards to our mailbox;</li><li><strong>Microsoft Corporation</strong> (Microsoft 365 email) — enquiries and correspondence;</li><li><strong>Google LLC</strong> (Google Analytics, only if you accept analytics cookies) — pages visited, approximate location, device and browser information;</li><li><strong>Flagpedia / flagcdn.com</strong> — loads the country flag images in the phone field, which means your browser sends it your IP address.</li></ul>
 <p>We may also disclose information if required by law, or to protect our rights, our clients or the public.</p>
 <p><strong>International transfers.</strong> Some of these providers store data outside India, including in the United States. Where UK or EU law applies, we rely on appropriate safeguards such as standard contractual clauses.</p>
 
@@ -753,8 +753,9 @@ body{padding-bottom:70px}
 <table><thead><tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr></thead><tbody>
 <tr><td>ar-theme</td><td>Local storage</td><td>Remembers the colour theme you picked</td><td>Until you clear it</td></tr>
 <tr><td>ar-consent</td><td>Local storage</td><td>Remembers your cookie choice</td><td>12 months</td></tr>
+<tr><td>_ga, _ga_*</td><td>Cookie (Google Analytics)</td><td>Distinguishes visitors and sessions so we can measure site usage. Set only if you click “Accept all”.</td><td>Up to 2 years</td></tr>
 </tbody></table>
-<p>If we add analytics in the future, it will only run if you click “Accept all” in the cookie banner. You can change your choice at any time using <button type="button" class="linklike" data-cookie-settings>Cookie settings</button> at the bottom of every page.</p>
+<p>Google Analytics only runs if you click “Accept all” in the cookie banner. You can change your choice at any time using <button type="button" class="linklike" data-cookie-settings>Cookie settings</button> at the bottom of every page.</p>
 
 <h2 id="pp-keep">6. How long we keep it</h2>
 <ul><li>Enquiries that don’t lead to a contract: up to 24 months after our last contact, then deleted.</li><li>Information about clients: for the length of the relationship and afterwards as required for legal, tax and accounting purposes.</li><li>Server logs: kept by our hosting provider in line with its own retention policy.</li></ul>
@@ -1018,7 +1019,9 @@ body{padding-bottom:70px}
 (function(){var box=document.getElementById('cookie'),K='ar-consent',YEAR=365*864e5;
 function get(){try{var v=JSON.parse(localStorage.getItem(K)||'null');if(v&&Date.now()-v.t<YEAR)return v.c}catch(e){}return null}
 function save(c){try{localStorage.setItem(K,JSON.stringify({c:c,t:Date.now()}))}catch(e){}window.arConsent=c;box.hidden=true;document.dispatchEvent(new CustomEvent('ar:consent',{detail:c}))}
-window.arConsent=get();if(!window.arConsent)box.hidden=false;
+function ga(){if(window.__arGA)return;window.__arGA=1;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-N35F6V72';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date())}
+document.addEventListener('ar:consent',function(e){if(e.detail==='all')ga()});
+window.arConsent=get();if(!window.arConsent)box.hidden=false;else if(window.arConsent==='all')ga();
 document.getElementById('ckAcc').addEventListener('click',function(){save('all')});
 document.getElementById('ckRej').addEventListener('click',function(){save('essential')});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cookie-settings]');if(b){box.hidden=false;document.getElementById('ckRej').focus()}});})();
