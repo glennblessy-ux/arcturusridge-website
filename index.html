@@ -256,6 +256,23 @@ form .full{grid-column:1/-1}
 .f::placeholder{color:#9AA3AE;font-weight:400}
 select.f{-webkit-appearance:none;appearance:none;height:50px;line-height:24px;padding-right:42px;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230B1F3A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center}
 textarea.f{min-height:110px;line-height:1.5}
+.tel{position:relative;display:flex;align-items:stretch;border:1px solid #CDD1D6;border-radius:8px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.tel:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.2)}
+.tel .f{border:0;border-radius:0 8px 8px 0;box-shadow:none!important;min-width:0;flex:1;padding-left:12px}
+.cc{display:flex;align-items:center;gap:7px;padding:0 10px 0 14px;border:0;border-right:1px solid #E3E6EA;background:transparent;border-radius:8px 0 0 8px;color:var(--navy);font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
+.cc:hover{background:#F6F4EE}.cc:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.cc img,.cclist img{border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);object-fit:cover;flex:none}
+.ccpop{position:absolute;z-index:30;top:calc(100% + 6px);left:0;width:min(320px,calc(100vw - 48px));background:#fff;border:1px solid #DDE1E6;border-radius:10px;box-shadow:0 24px 48px -20px rgba(11,31,58,.35);padding:8px;font-weight:500}
+.ccsearch{width:100%;height:40px;padding:0 12px;border:1px solid #DDE1E6;border-radius:7px;font-size:14.5px;color:var(--ink);margin-bottom:6px}
+.ccsearch:focus{outline:none;border-color:var(--gold)}
+.cclist{list-style:none;margin:0;padding:0;max-height:260px;overflow-y:auto}
+.cclist li{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;font-size:14.5px;color:var(--ink);cursor:pointer}
+.cclist li .cn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cclist li .cd{color:#6B7480;font-variant-numeric:tabular-nums}
+.cclist li:hover,.cclist li.act{background:#F3EFE4}
+.cclist li[aria-selected=true]{font-weight:700}
+.cclist .sep{height:1px;background:#EEF0F2;margin:4px 6px;padding:0;pointer-events:none}
+.cclist .none{color:#6B7480;cursor:default}
 .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 #form button[disabled]{opacity:.7;cursor:wait}
 .f.bad{border-color:#B3261E}
@@ -603,7 +620,16 @@ textarea.f{min-height:110px;line-height:1.5}
 <label class="fl">Full name *<input class="f" type="text" name="fullname" autocomplete="name" placeholder="Jane Smith" required></label>
 <label class="fl">Work email *<input class="f" type="email" name="email" autocomplete="email" placeholder="jane@company.com" required></label>
 <label class="fl">Company<input class="f" type="text" name="company" autocomplete="organization" placeholder="Company name"></label>
-<label class="fl">Phone<input class="f" type="tel" name="phone" autocomplete="tel" placeholder="+91 98765 43210"></label>
+<div class="fl"><label for="fPhone">Phone</label>
+<div class="tel" id="tel">
+<button type="button" class="cc" id="ccBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Country code: United States +1"><img id="ccFlag" src="https://flagcdn.com/w40/us.png" alt="" width="22" height="16"><span id="ccCode">+1</span><svg width="10" height="7" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<input class="f" id="fPhone" type="tel" name="phone" autocomplete="tel-national" inputmode="tel" placeholder="(555) 123-4567">
+<input type="hidden" name="dial" id="ccDial" value="+1">
+<div class="ccpop" id="ccPop" hidden>
+<input type="search" class="ccsearch" id="ccSearch" placeholder="Search country or code" aria-label="Search country or code" autocomplete="off">
+<ul class="cclist" id="ccList" role="listbox" aria-label="Country code"></ul>
+</div>
+</div></div>
 <label class="fl">Monthly invoice volume<select class="f" name="volume"><option>Under 1,000</option><option>1,000 – 5,000</option><option>5,000 – 20,000</option><option>Over 20,000</option></select></label>
 <label class="fl">Your ERP<select class="f" name="erp"><option>SAP</option><option>Oracle NetSuite</option><option>Microsoft Dynamics</option><option>Tally Prime</option><option>Zoho Books</option><option>Coupa</option><option>QuickBooks</option><option>Other</option></select></label>
 <label class="fl full">Anything else we should know?<textarea class="f" name="message" rows="4" style="resize:vertical" placeholder="Current challenges, timelines, number of entities…"></textarea></label>
@@ -742,6 +768,49 @@ textarea.f{min-height:110px;line-height:1.5}
   /* FAQ */
   $$('.qa').forEach(function (q) { var b = q.querySelector('button'); b.addEventListener('click', function () { var o = !q.classList.contains('open'); q.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }); });
 
+  /* country code picker */
+  var CC = "us|United States|1;in|India|91;gb|United Kingdom|44;ae|United Arab Emirates|971;sg|Singapore|65;au|Australia|61;ca|Canada|1;af|Afghanistan|93;al|Albania|355;dz|Algeria|213;ad|Andorra|376;ao|Angola|244;ar|Argentina|54;am|Armenia|374;at|Austria|43;az|Azerbaijan|994;bs|Bahamas|1;bh|Bahrain|973;bd|Bangladesh|880;bb|Barbados|1;by|Belarus|375;be|Belgium|32;bz|Belize|501;bj|Benin|229;bt|Bhutan|975;bo|Bolivia|591;ba|Bosnia and Herzegovina|387;bw|Botswana|267;br|Brazil|55;bn|Brunei|673;bg|Bulgaria|359;bf|Burkina Faso|226;bi|Burundi|257;kh|Cambodia|855;cm|Cameroon|237;cv|Cape Verde|238;cf|Central African Republic|236;td|Chad|235;cl|Chile|56;cn|China|86;co|Colombia|57;km|Comoros|269;cg|Congo|242;cd|Congo (DRC)|243;cr|Costa Rica|506;ci|Côte d’Ivoire|225;hr|Croatia|385;cu|Cuba|53;cy|Cyprus|357;cz|Czechia|420;dk|Denmark|45;dj|Djibouti|253;dm|Dominica|1;do|Dominican Republic|1;ec|Ecuador|593;eg|Egypt|20;sv|El Salvador|503;gq|Equatorial Guinea|240;er|Eritrea|291;ee|Estonia|372;sz|Eswatini|268;et|Ethiopia|251;fj|Fiji|679;fi|Finland|358;fr|France|33;ga|Gabon|241;gm|Gambia|220;ge|Georgia|995;de|Germany|49;gh|Ghana|233;gr|Greece|30;gd|Grenada|1;gt|Guatemala|502;gn|Guinea|224;gw|Guinea-Bissau|245;gy|Guyana|592;ht|Haiti|509;hn|Honduras|504;hk|Hong Kong|852;hu|Hungary|36;is|Iceland|354;id|Indonesia|62;ir|Iran|98;iq|Iraq|964;ie|Ireland|353;il|Israel|972;it|Italy|39;jm|Jamaica|1;jp|Japan|81;jo|Jordan|962;kz|Kazakhstan|7;ke|Kenya|254;ki|Kiribati|686;kw|Kuwait|965;kg|Kyrgyzstan|996;la|Laos|856;lv|Latvia|371;lb|Lebanon|961;ls|Lesotho|266;lr|Liberia|231;ly|Libya|218;li|Liechtenstein|423;lt|Lithuania|370;lu|Luxembourg|352;mo|Macao|853;mg|Madagascar|261;mw|Malawi|265;my|Malaysia|60;mv|Maldives|960;ml|Mali|223;mt|Malta|356;mh|Marshall Islands|692;mr|Mauritania|222;mu|Mauritius|230;mx|Mexico|52;fm|Micronesia|691;md|Moldova|373;mc|Monaco|377;mn|Mongolia|976;me|Montenegro|382;ma|Morocco|212;mz|Mozambique|258;mm|Myanmar|95;na|Namibia|264;nr|Nauru|674;np|Nepal|977;nl|Netherlands|31;nz|New Zealand|64;ni|Nicaragua|505;ne|Niger|227;ng|Nigeria|234;kp|North Korea|850;mk|North Macedonia|389;no|Norway|47;om|Oman|968;pk|Pakistan|92;pw|Palau|680;ps|Palestine|970;pa|Panama|507;pg|Papua New Guinea|675;py|Paraguay|595;pe|Peru|51;ph|Philippines|63;pl|Poland|48;pt|Portugal|351;pr|Puerto Rico|1;qa|Qatar|974;ro|Romania|40;ru|Russia|7;rw|Rwanda|250;kn|Saint Kitts and Nevis|1;lc|Saint Lucia|1;vc|Saint Vincent and the Grenadines|1;ws|Samoa|685;sm|San Marino|378;st|São Tomé and Príncipe|239;sa|Saudi Arabia|966;sn|Senegal|221;rs|Serbia|381;sc|Seychelles|248;sl|Sierra Leone|232;sk|Slovakia|421;si|Slovenia|386;sb|Solomon Islands|677;so|Somalia|252;za|South Africa|27;kr|South Korea|82;ss|South Sudan|211;es|Spain|34;lk|Sri Lanka|94;sd|Sudan|249;sr|Suriname|597;se|Sweden|46;ch|Switzerland|41;sy|Syria|963;tw|Taiwan|886;tj|Tajikistan|992;tz|Tanzania|255;th|Thailand|66;tl|Timor-Leste|670;tg|Togo|228;to|Tonga|676;tt|Trinidad and Tobago|1;tn|Tunisia|216;tr|Türkiye|90;tm|Turkmenistan|993;tv|Tuvalu|688;ug|Uganda|256;ua|Ukraine|380;uy|Uruguay|598;uz|Uzbekistan|998;vu|Vanuatu|678;va|Vatican City|39;ve|Venezuela|58;vn|Vietnam|84;ye|Yemen|967;zm|Zambia|260;zw|Zimbabwe|263".split(';').map(function (r) { var a = r.split('|'); return { iso: a[0], name: a[1], dial: '+' + a[2] }; });
+  var TOP = 7, ccBtn = $('#ccBtn'), ccPop = $('#ccPop'), ccList = $('#ccList'), ccSearch = $('#ccSearch'), ccCur = CC[0], ccAct = -1, ccShown = [];
+  function flag(iso) { return 'https://flagcdn.com/w40/' + iso + '.png'; }
+  function ccRender(q) {
+    q = (q || '').trim().toLowerCase().replace(/^\+/, '');
+    ccShown = q ? CC.filter(function (c) { return c.name.toLowerCase().indexOf(q) > -1 || c.dial.slice(1).indexOf(q) === 0 || c.iso === q; }) : CC;
+    ccList.innerHTML = '';
+    if (!ccShown.length) { var n = document.createElement('li'); n.className = 'none'; n.textContent = 'No match'; ccList.appendChild(n); }
+    ccShown.forEach(function (c, i) {
+      if (!q && i === TOP) { var sp = document.createElement('li'); sp.className = 'sep'; sp.setAttribute('aria-hidden', 'true'); ccList.appendChild(sp); }
+      var li = document.createElement('li'); li.setAttribute('role', 'option'); li.id = 'cc-' + c.iso + '-' + i;
+      li.setAttribute('aria-selected', c === ccCur ? 'true' : 'false'); li.dataset.i = i;
+      li.innerHTML = '<img loading="lazy" src="' + flag(c.iso) + '" alt="" width="22" height="16"><span class="cn"></span><span class="cd"></span>';
+      li.querySelector('.cn').textContent = c.name; li.querySelector('.cd').textContent = c.dial;
+      ccList.appendChild(li);
+    });
+    ccAct = -1;
+  }
+  function ccHi(i) {
+    var items = ccList.querySelectorAll('[role=option]'); if (!items.length) return;
+    ccAct = (i + items.length) % items.length;
+    items.forEach(function (el, k) { el.classList.toggle('act', k === ccAct); });
+    items[ccAct].scrollIntoView({ block: 'nearest' });
+  }
+  function ccOpen() { ccRender(''); ccPop.hidden = false; ccBtn.setAttribute('aria-expanded', 'true'); ccSearch.value = ''; ccSearch.focus();
+    var sel = ccList.querySelector('[aria-selected=true]'); if (sel) sel.scrollIntoView({ block: 'nearest' }); }
+  function ccClose(focusBtn) { ccPop.hidden = true; ccBtn.setAttribute('aria-expanded', 'false'); if (focusBtn) ccBtn.focus(); }
+  function ccPick(c) {
+    ccCur = c; $('#ccFlag').src = flag(c.iso); $('#ccCode').textContent = c.dial; $('#ccDial').value = c.dial;
+    ccBtn.setAttribute('aria-label', 'Country code: ' + c.name + ' ' + c.dial); ccClose(false); $('#fPhone').focus();
+  }
+  ccBtn.addEventListener('click', function () { ccPop.hidden ? ccOpen() : ccClose(true); });
+  ccSearch.addEventListener('input', function () { ccRender(ccSearch.value); if (ccSearch.value) ccHi(0); });
+  ccSearch.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); ccHi(ccAct + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); ccHi(ccAct - 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); var it = ccList.querySelectorAll('[role=option]')[ccAct < 0 ? 0 : ccAct]; if (it) ccPick(ccShown[+it.dataset.i]); }
+    else if (e.key === 'Escape') { e.preventDefault(); ccClose(true); }
+  });
+  ccList.addEventListener('click', function (e) { var li = e.target.closest('[role=option]'); if (li) ccPick(ccShown[+li.dataset.i]); });
+  document.addEventListener('click', function (e) { if (!ccPop.hidden && !$('#tel').contains(e.target)) ccClose(false); });
+
   /* form */
   var form = $('#form'), wrap = $('#formWrap'), err = $('#formErr');
   form.addEventListener('submit', function (e) {
@@ -760,7 +829,7 @@ textarea.f{min-height:110px;line-height:1.5}
     var body = {
       _subject: 'New website enquiry: ' + d.fullname + (d.company ? ' (' + d.company + ')' : ''),
       _replyto: d.email, _template: 'table', _captcha: 'false',
-      'Full name': d.fullname, 'Work email': d.email, 'Company': d.company || '-', 'Phone': d.phone || '-',
+      'Full name': d.fullname, 'Work email': d.email, 'Company': d.company || '-', 'Phone': d.phone ? form.elements.namedItem('dial').value + ' ' + d.phone : '-',
       'Monthly invoice volume': d.volume, 'ERP': d.erp, 'Message': d.message || '-'
     };
     fetch('https://formsubmit.co/ajax/support@arcturusridge.com', {
@@ -770,7 +839,7 @@ textarea.f{min-height:110px;line-height:1.5}
       .catch(function () { err.innerHTML = 'Sorry, that didn\u2019t send. Please email <a href="mailto:support@arcturusridge.com">support@arcturusridge.com</a> or call <a href="tel:+917806894099">+91 78068 94099</a>.'; })
       .then(function () { btn.disabled = false; btn.textContent = label; });
   });
-  $('#again').addEventListener('click', function () { form.reset(); wrap.classList.remove('sent'); });
+  $('#again').addEventListener('click', function () { form.reset(); ccPick(CC[0]); wrap.classList.remove('sent'); });
 
   route();
 })();
