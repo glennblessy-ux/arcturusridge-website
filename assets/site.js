@@ -1,16 +1,16 @@
 /* ArcturusRidge shared script for article pages: theme, cookie consent, analytics */
 (function () {
-  var GA_ID = window.AR_GA_ID || '';
+  var GA_ID = 'GTM-N35F6V72';
   var d = document.documentElement;
-  try { var t = localStorage.getItem('ar-theme'); if (t) d.setAttribute('data-theme', t); } catch (e) {}
+  try { localStorage.removeItem('ar-theme'); } catch (e) {}
 
   function loadGA() {
     if (!GA_ID || window.__arGA) return; window.__arGA = 1;
     var s = document.createElement('script'); s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GA_ID; document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { dataLayer.push(arguments); };
-    gtag('js', new Date()); gtag('config', GA_ID, { anonymize_ip: true });
+    gtag('js', new Date());
   }
 
   var K = 'ar-consent', YEAR = 365 * 864e5;
